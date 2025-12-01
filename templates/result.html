@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prediction Result</title>
+  <style>
+    body { font-family: Arial, margin: 40px; }
+    .container { max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; border-radius: 6px; }
+    .result { font-size: 1.25rem; margin-bottom: 10px; }
+    .prob { color: #333; font-weight: bold; }
+    .back { display: inline-block; margin-top: 15px; padding: 8px 12px; text-decoration: none; background:#222; color:#fff; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Prediction Result</h2>
+
+    <div class="result">
+      {{ result }}
+    </div>
+
+    <div>
+      Probability of churn: <span class="prob">{{ probability }}%</span>
+    </div>
+
+    <a class="back" href="/">← Back to form</a>
+  </div>
+</body>
+</html>

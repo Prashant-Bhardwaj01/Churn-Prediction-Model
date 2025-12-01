@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Churn Prediction Form</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .container { width: 400px; margin: auto; }
+        input, label { display: block; width: 100%; margin-bottom: 10px; }
+        button { padding: 10px; width: 100%; background: black; color: white; border: none; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Customer Churn Prediction</h2>
+
+        <form action="/predict" method="POST">
+
+            {% for col in columns %}
+                <label>{{ col }}</label>
+                <input type="number" step="any" name="{{ col }}" required>
+            {% endfor %}
+
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>

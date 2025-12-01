@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # load model files 
 model = joblib.load("model/churn_model.joblib")
-scaler = joblib.load("modle/scaler.joblib")
+scaler = joblib.load("model/scaler.joblib")
 columns = joblib.load("model/columns.joblib")
 
 @app.route("/")
