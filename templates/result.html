@@ -1,67 +1,106 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prediction Result</title>
+    <title>Result</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         body {
-            background: #eef1f7;
-            font-family: "Segoe UI", Arial;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #6a85b6, #33ccff, #ff7eb3);
+            background-size: 400% 400%;
+            animation: gradientMove 8s ease infinite;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .card {
-            border-radius: 14px;
-            padding: 20px;
-            margin-top: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .prediction-good {
-            color: #0f9d58;
+
+        .result-card {
+            width: 480px;
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            animation: popIn 0.7s ease;
+            text-align: center;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.6); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .result-title {
+            font-size: 1.5rem;
             font-weight: bold;
+            margin-bottom: 10px;
         }
-        .prediction-bad {
-            color: #d93025;
-            font-weight: bold;
-        }
+
+        .stay { color: #0f9d58; text-shadow: 0px 0px 10px rgba(15,157,88,0.7); }
+        .churn { color: #d93025; text-shadow: 0px 0px 10px rgba(217,48,37,0.7); }
+
         .prob-box {
             font-size: 1.3rem;
-            background: #fff;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.5);
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn-back {
+            margin-top: 25px;
             padding: 12px;
-            border-radius: 10px;
-            margin-top: 10px;
-            text-align: center;
-            border-left: 4px solid #4b49ac;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #ff4f8b, #e636ff);
+            color: white;
+            font-weight: bold;
+            border: none;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,79,139,0.8);
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="result-card animate__animated animate__fadeInUp">
 
-            <div class="card text-center">
-
-                <h3>Prediction Result</h3>
-
-                {% if "STAY" in result %}
-                    <p class="prediction-good">{{ result }}</p>
-                {% else %}
-                    <p class="prediction-bad">{{ result }}</p>
-                {% endif %}
-
-                <div class="prob-box">
-                    Probability of Churn: <strong>{{ probability }}%</strong>
-                </div>
-
-                <a href="/" class="btn btn-primary w-100 mt-4">Try Another Prediction</a>
-
-            </div>
-
-        </div>
+    <div class="result-title">
+        Prediction Result
     </div>
+
+    {% if "STAY" in result %}
+        <p class="stay animate__animated animate__pulse animate__infinite">{{ result }}</p>
+    {% else %}
+        <p class="churn animate__animated animate__shakeX">{{ result }}</p>
+    {% endif %}
+
+    <div class="prob-box">
+        Churn Probability: <strong>{{ probability }}%</strong>
+    </div>
+
+    <a href="/" class="btn-back">Try Again</a>
 </div>
 
 </body>
